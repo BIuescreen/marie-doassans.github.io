@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marie Doassans – Portfolio</title>
+<meta name="description" content="Portfolio de Marie Doassans – BTS SIO SLAM 2026 – Développeuse Python/Flask">
+<style>
+/* ── Reset & base ── */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;
+  --bg:#f6f8fa;
+  --panel:#ffffff;
+  --border:#d0d7de;
+  --border-light:#eaecef;
+  --text:#1f2328;
+  --muted:#656d76;
+  --blue:#0969da;
+  --blue-bg:#ddf4ff;
+  --blue-border:#54aeff;
+  --green:#1a7f37;
+  --green-bg:#dafbe1;
+  --green-border:#4ac26b;
+  --purple:#8250df;
+  --purple-bg:#fbefff;
+  --purple-border:#c297ff;
+  --orange:#bc4c00;
+  --orange-bg:#fff1e5;
+  --orange-border:#ffa657;
+  --red:#cf222e;
+  --accent:#0969da;
+  --heading:#1f2328;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:.75rem 0;
+}
+.nav-inner{
+  max-width:1000px;margin:0 auto;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{
+  font-weight:700;font-size:.95rem;color:var(--heading);
+  display:flex;align-items:center;gap:.5rem;
+}
+.nav-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#0969da,#8250df);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:700;color:#fff;flex-shrink:0;
+}
+.nav-links{display:flex;gap:1.5rem;font-size:.875rem}
+.nav-links a{color:var(--muted);transition:color .15s}
+.nav-links a:hover{color:var(--heading);text-decoration:none}
+
+/* ── HERO ── */
+.hero{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:4rem 2rem 3.5rem;text-align:center;
+}
+.hero-inner{max-width:640px;margin:0 auto}
+.hero-big-avatar{
+  width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(135deg,#0969da,#8250df);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;font-weight:700;color:#fff;
+  margin:0 auto 1.5rem;
+  border:3px solid var(--border);
+}
+.hero-name{font-size:2rem;font-weight:700;color:var(--heading);margin-bottom:.35rem;letter-spacing:-.5px}
+.hero-role{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--blue-bg);color:var(--blue);
+  border:1px solid var(--blue-border);border-radius:20px;
+  font-size:.8rem;font-weight:600;padding:.3rem .9rem;
+  margin-bottom:1.25rem;letter-spacing:.3px;
+}
+.hero-desc{color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto 2rem;line-height:1.75}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* ── BOUTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.5rem 1.1rem;border-radius:6px;font-size:.875rem;
+  font-weight:500;cursor:pointer;border:1px solid;
+  transition:all .15s;text-decoration:none!important;
+  font-family:inherit;
+}
+.btn-primary{background:#0969da;border-color:#0969da;color:#fff}
+.btn-primary:hover{background:#0860c9;border-color:#0860c9}
+.btn-outline{background:var(--white);border-color:var(--border);color:var(--heading)}
+.btn-outline:hover{background:var(--bg);border-color:var(--muted)}
+.btn-sm{padding:.35rem .85rem;font-size:.8rem}
+
+/* ── LAYOUT ── */
+.page{max-width:1000px;margin:0 auto;padding:3rem 2rem}
+.section-title{
+  font-size:.75rem;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:1.5rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--border-light);
+}
+
+/* ── PROJETS ── */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:1.25rem;margin-bottom:3rem}
+.project-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:box-shadow .2s,border-color .2s;
+  display:flex;flex-direction:column;
+}
+.project-card:hover{box-shadow:0 4px 16px rgba(31,35,40,.1);border-color:var(--blue-border)}
+
+.pc-header{padding:1.5rem 1.5rem 0}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
+.pc-icon{
+  width:48px;height:48px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;font-weight:700;flex-shrink:0;
+  border:1px solid;
+}
+.pc-icon-blue{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)}
+.pc-icon-green{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
+.pc-badges{display:flex;gap:.4rem;flex-wrap:wrap}
+.pc-name{font-size:1.2rem;font-weight:700;color:var(--heading);margin-bottom:.5rem}
+.pc-desc{font-size:.875rem;color:var(--muted);line-height:1.7;padding:0 1.5rem}
+
+.pc-body{padding:1.25rem 1.5rem;flex:1}
+.pc-stack{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.pc-meta{display:grid;gap:.5rem}
+.meta-row{display:flex;gap:.75rem;font-size:.8rem}
+.meta-label{
+  color:var(--muted);font-weight:600;min-width:85px;flex-shrink:0;
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.3px;padding-top:1px;
+}
+.meta-value{color:var(--text)}
+
+.pc-footer{
+  display:flex;gap:.75rem;padding:1rem 1.5rem;
+  border-top:1px solid var(--border-light);
+  background:var(--bg);
+}
+.pc-link{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.8rem;color:var(--accent);font-weight:500;
+  padding:.35rem .75rem;border:1px solid var(--blue-border);
+  background:var(--blue-bg);border-radius:6px;
+  transition:all .15s;text-decoration:none!important;
+}
+.pc-link:hover{background:#c8e6fd;text-decoration:none}
+.pc-link svg{width:14px;height:14px;flex-shrink:0}
+
+/* ── TAGS ── */
+.tag{font-size:.72rem;font-weight:500;padding:.2rem .55rem;border-radius:4px;border:1px solid}
+.tag-blue{background:var(--blue-bg);color:#0550ae;border-color:#96d0ff}
+.tag-green{background:var(--green-bg);color:#116329;border-color:#82cfad}
+.tag-orange{background:var(--orange-bg);color:var(--orange);border-color:var(--orange-border)}
+.tag-purple{background:var(--purple-bg);color:#6639ba;border-color:var(--purple-border)}
+.tag-gray{background:#f6f8fa;color:var(--muted);border-color:var(--border)}
+
+/* ── BADGES ── */
+.badge{font-size:.65rem;font-weight:600;padding:.25rem .6rem;border-radius:20px;border:1px solid}
+.badge-bts{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
+.badge-perso{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)}
+.badge-equipe{background:var(--purple-bg);color:var(--purple);border-color:var(--purple-border)}
+
+/* ── COMPÉTENCES ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:3rem}
+.skill-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.skill-title{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:3rem}
+.stat-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1.25rem;text-align:center;
+}
+.stat-num{font-size:1.75rem;font-weight:700;color:var(--heading);line-height:1}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.35rem}
+.stat-card.blue .stat-num{color:var(--blue)}
+.stat-card.green .stat-num{color:var(--green)}
+.stat-card.purple .stat-num{color:var(--purple)}
+.stat-card.orange .stat-num{color:var(--orange)}
+
+/* ── TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:0;margin-bottom:3rem}
+.tl-item{display:flex;gap:1.25rem;position:relative}
+.tl-item:not(:last-child)::before{
+  content:'';position:absolute;
+  left:7px;top:18px;bottom:-1px;
+  width:2px;background:var(--border-light);
+}
+.tl-dot{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--border);background:var(--white);
+  flex-shrink:0;margin-top:2px;z-index:1;transition:border-color .2s;
+}
+.tl-item.now .tl-dot{border-color:var(--blue);background:var(--blue)}
+.tl-content{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:8px;padding:.875rem 1.1rem;flex:1;margin-bottom:.875rem;
+}
+.tl-date{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-bottom:.2rem}
+.tl-title{font-size:.9rem;font-weight:700;color:var(--heading);margin-bottom:.2rem}
+.tl-sub{font-size:.8rem;color:var(--muted)}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.contact-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1rem 1.25rem;
+  display:flex;align-items:center;gap:.875rem;
+  transition:border-color .15s;
+}
+.contact-card:hover{border-color:var(--blue-border)}
+.contact-icon{
+  width:38px;height:38px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.contact-label{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-bottom:.15rem}
+.contact-val{font-size:.82rem;color:var(--text)}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:2rem;
+  border-top:1px solid var(--border);
+  font-size:.8rem;color:var(--muted);
+  background:var(--white);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:650px){
+  .projects{grid-template-columns:1fr}
+  .nav-links{gap:1rem;font-size:.8rem}
+  .hero-name{font-size:1.6rem}
+  .page{padding:2rem 1rem}
+  .hero{padding:3rem 1rem 2.5rem}
+  .nav-inner{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-avatar">MD</div>
+      Marie Doassans
+    </div>
+    <div class="nav-links">
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-big-avatar">MD</div>
+    <h1 class="hero-name">Marie Doassans</h1>
+    <div class="hero-role">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.75a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.75.75 0 0 0-.53.22L4.5 14.44v-2.19a.75.75 0 0 0-.75-.75H1.75a.25.25 0 0 1-.25-.25Z"/></svg>
+      BTS SIO · Option SLAM · 2026
+    </div>
+    <p class="hero-desc">
+      Étudiante en développement logiciel passionnée par la cybersécurité et l'automatisation.
+      Spécialisée en Python&nbsp;/&nbsp;Flask, MySQL et déploiement Docker sur VPS.
+    </p>
+    <div class="hero-btns">
+      <a href="https://github.com/marie-doassans" target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <a href="https://vulnwatch.site" target="_blank" class="btn btn-outline">vulnwatch.site</a>
+      <a href="https://cyber-hoot.site" target="_blank" class="btn btn-outline">cyber-hoot.site</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="page">
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card blue">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Projets déployés</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-num">108</div>
+      <div class="stat-label">Tests écrits</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Sources CVE intégrées</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-num">9</div>
+      <div class="stat-label">Technologies maîtrisées</div>
+    </div>
+  </div>
+
+  <!-- ── PROJETS ── -->
+  <section id="projets">
+    <div class="section-title">Projets réalisés</div>
+    <div class="projects">
+
+      <!-- VulnWatch -->
+      <div class="project-card">
+        <div class="pc-header">
+          <div class="pc-top">
+            <div class="pc-icon pc-icon-blue">VW</div>
+            <div class="pc-badges">
+              <span class="badge badge-perso">Projet perso</span>
+              <span class="badge badge-bts">BTS SIO E6</span>
+            </div>
+          </div>
+          <div class="pc-name">VulnWatch</div>
+        </div>
+        <p class="pc-desc">
+          Agrégateur de veille cybersécurité avec alertes automatisées. Collecte toutes les heures
+          les nouvelles CVE depuis NVD, CERT-FR et Exploit-DB, les filtre selon des règles
+          personnalisées (seuil CVSS, mots-clés) et envoie des alertes Discord ou Email via
+          des workflows <strong>n8n</strong> self-hosted.
+        </p>
+        <div class="pc-body">
+          <div class="pc-stack">
+            <span class="tag tag-blue">Python 3.11</span>
+            <span class="tag tag-blue">Flask</span>
+            <span class="tag tag-blue">SQLAlchemy</span>
+            <span class="tag tag-green">MySQL 8</span>
+            <span class="tag tag-green">Docker</span>
+            <span class="tag tag-purple">n8n</span>
+            <span class="tag tag-purple">discord.py</span>
+            <span class="tag tag-orange">NVD API</span>
+            <span class="tag tag-orange">CERT-FR RSS</span>
+            <span class="tag tag-gray">TailwindCSS</span>
+            <span class="tag tag-gray">Alembic</span>
+            <span class="tag tag-gray">pytest</span>
+          </div>
+          <div class="pc-meta">
+            <div class="meta-row">
+              <span class="meta-label">Période</span>
+              <span class="meta-value">Novembre 2025 → Avril 2026</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Sources CVE</span>
+              <span class="meta-value">NVD API · CERT-FR RSS · Exploit-DB scraping</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Alertes</span>
+              <span class="meta-value">Discord DM (embed coloré) · Email HTML via n8n</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Sécurité</span>
+              <span class="meta-value">PBKDF2-SHA256 · AES-256 · CSP nonce · itsdangerous</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Tests</span>
+              <span class="meta-value">47 tests pytest + unittest.mock</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Déploiement</span>
+              <span class="meta-value">VPS Ubuntu · Nginx · Gunicorn · Let's Encrypt</span>
+            </div>
+          </div>
+        </div>
+        <div class="pc-footer">
+          <a href="https://github.com/marie-doassans/vulnwatch" target="_blank" class="pc-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            Code source
+          </a>
+          <a href="https://vulnwatch.site" target="_blank" class="pc-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5Z"/></svg>
+            Voir le site
+          </a>
+        </div>
+      </div>
+
+      <!-- Cyberhoot -->
+      <div class="project-card">
+        <div class="pc-header">
+          <div class="pc-top">
+            <div class="pc-icon pc-icon-green">CH</div>
+            <div class="pc-badges">
+              <span class="badge badge-bts">BTS SIO E6</span>
+              <span class="badge badge-equipe">Projet d'équipe</span>
+            </div>
+          </div>
+          <div class="pc-name">Cyberhoot</div>
+        </div>
+        <p class="pc-desc">
+          Plateforme web de sensibilisation à la cybersécurité par le jeu. Quiz thématiques
+          interactifs avec système de badges et gamification, trois rôles distincts (joueur,
+          rédacteur, administrateur), validation VirusTotal des fichiers uploadés et tableau
+          de bord statistiques pour les créateurs.
+        </p>
+        <div class="pc-body">
+          <div class="pc-stack">
+            <span class="tag tag-blue">Python 3.x</span>
+            <span class="tag tag-blue">Flask</span>
+            <span class="tag tag-blue">SQLAlchemy</span>
+            <span class="tag tag-blue">Werkzeug</span>
+            <span class="tag tag-green">MySQL</span>
+            <span class="tag tag-green">Docker</span>
+            <span class="tag tag-orange">VirusTotal API</span>
+            <span class="tag tag-orange">Alembic</span>
+            <span class="tag tag-gray">Jinja2</span>
+            <span class="tag tag-gray">TailwindCSS</span>
+            <span class="tag tag-gray">Flask-Mail</span>
+          </div>
+          <div class="pc-meta">
+            <div class="meta-row">
+              <span class="meta-label">Période</span>
+              <span class="meta-value">Novembre 2025 → Avril 2026</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Rôles</span>
+              <span class="meta-value">Joueur · Rédacteur · Administrateur</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Fonctions</span>
+              <span class="meta-value">Quiz CRUD · Badges · Scores · Notifications email</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Sécurité</span>
+              <span class="meta-value">PBKDF2 · CSP nonce · tokens itsdangerous</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Tests</span>
+              <span class="meta-value">61 tests pytest</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Déploiement</span>
+              <span class="meta-value">VPS OVH · Nginx · Gunicorn · HTTPS OVH DNS</span>
+            </div>
+          </div>
+        </div>
+        <div class="pc-footer">
+          <a href="https://github.com/lele214/Cyber-hoot" target="_blank" class="pc-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            Code source
+          </a>
+          <a href="https://cyber-hoot.site" target="_blank" class="pc-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5Z"/></svg>
+            Voir le site
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── COMPÉTENCES ── -->
+  <section id="competences">
+    <div class="section-title">Compétences techniques</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Langages</div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">Python</span>
+          <span class="tag tag-blue">PHP</span>
+          <span class="tag tag-blue">JavaScript</span>
+          <span class="tag tag-blue">TypeScript</span>
+          <span class="tag tag-blue">SQL</span>
+          <span class="tag tag-blue">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Frameworks</div>
+        <div class="skill-tags">
+          <span class="tag tag-green">Flask</span>
+          <span class="tag tag-green">Symfony</span>
+          <span class="tag tag-green">React</span>
+          <span class="tag tag-green">Vue.js</span>
+          <span class="tag tag-green">TailwindCSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Base de données</div>
+        <div class="skill-tags">
+          <span class="tag tag-orange">MySQL</span>
+          <span class="tag tag-orange">SQLAlchemy</span>
+          <span class="tag tag-orange">Alembic</span>
+          <span class="tag tag-orange">PyMySQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">DevOps & Sécu</div>
+        <div class="skill-tags">
+          <span class="tag tag-purple">Docker</span>
+          <span class="tag tag-purple">Nginx</span>
+          <span class="tag tag-purple">n8n</span>
+          <span class="tag tag-purple">Git / GitHub</span>
+          <span class="tag tag-purple">Let's Encrypt</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Tests & Qualité</div>
+        <div class="skill-tags">
+          <span class="tag tag-gray">pytest</span>
+          <span class="tag tag-gray">unittest.mock</span>
+          <span class="tag tag-gray">VirusTotal API</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Méthodes & Outils</div>
+        <div class="skill-tags">
+          <span class="tag tag-gray">Agile / Kanban</span>
+          <span class="tag tag-gray">Git Flow</span>
+          <span class="tag tag-gray">UML / MCD</span>
+          <span class="tag tag-gray">Draw.io</span>
+          <span class="tag tag-gray">MySQL Workbench</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PARCOURS ── -->
+  <section id="parcours">
+    <div class="section-title">Parcours</div>
+    <div class="timeline">
+      <div class="tl-item now">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">2024 – 2026</div>
+          <div class="tl-title">BTS SIO – Option SLAM</div>
+          <div class="tl-sub">ESNA de Bretagne, Rennes — Conception et développement d'applications logicielles</div>
+        </div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">Nov. 2025 – Avr. 2026</div>
+          <div class="tl-title">Projets E6 — VulnWatch & Cyberhoot</div>
+          <div class="tl-sub">Développement full-stack Python / Flask · Docker · n8n · Déploiement VPS production</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">2023 – 2024</div>
+          <div class="tl-title">Première année BTS SIO</div>
+          <div class="tl-sub">JavaScript, PHP, Symfony · Bases réseau et systèmes · Premiers projets web</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">2023</div>
+          <div class="tl-title">Baccalauréat</div>
+          <div class="tl-sub">Obtention du baccalauréat — Premiers pas en développement web</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="section-title">Contact & liens</div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:var(--blue-bg)">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="#0969da"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-val"><a href="https://github.com/marie-doassans" target="_blank">github.com/marie-doassans</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" style="background:var(--blue-bg)">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="#0969da"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0zm5.845-2.855a.75.75 0 0 1 1.06 0l1.5 1.5-.53.53-.97-.97V11a.75.75 0 0 1-1.5 0V6.205l-.97.97-.53-.53 1.44-1.5z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">VulnWatch</div>
+          <div class="contact-val"><a href="https://vulnwatch.site" target="_blank">vulnwatch.site</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" style="background:var(--green-bg)">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="#1a7f37"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0zm5.845-2.855a.75.75 0 0 1 1.06 0l1.5 1.5-.53.53-.97-.97V11a.75.75 0 0 1-1.5 0V6.205l-.97.97-.53-.53 1.44-1.5z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Cyberhoot</div>
+          <div class="contact-val"><a href="https://cyber-hoot.site" target="_blank">cyber-hoot.site</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" style="background:var(--orange-bg)">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="#bc4c00"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">marie.doassans@esna.fr</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  © 2026 Marie Doassans · BTS SIO SLAM · ESNA de Bretagne, Rennes
+</footer>
+
+</body>
+</html>
